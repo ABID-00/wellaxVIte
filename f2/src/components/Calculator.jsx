@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const API_URL = "http://localhost:5000";
+const API_URL = "http://localhost:4090";
 
 const Calculator = ({ property }) => {
   const [area, setArea] = useState(1000);

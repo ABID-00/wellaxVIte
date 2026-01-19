@@ -1,15 +1,16 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import EMICalculator from "./EMICalculator";
+import NearbyPlaces from "./NearbyPlaces";
+import InvestmentAnalysis from "./InvestmentAnalysis";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
-
-// Vite-friendly Swiper imports
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+// Import modules from "swiper/modules"
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 
-// Vite env vars use VITE_ prefix
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4090";
+
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:4090";
 
 const PropertyShow = ({ propertyName, onNavigate }) => {
   const [property, setProperty] = useState(null);
@@ -24,11 +25,8 @@ const PropertyShow = ({ propertyName, onNavigate }) => {
         setProperty(data);
         setLoading(false);
       })
-      .catch((error) => {
-        console.error("Failed to fetch property:", error);
-        setLoading(false);
-      });
-  }, [propertyName, API_URL]);
+      .catch(() => setLoading(false));
+  }, [propertyName]);
 
   if (loading)
     return <div className="text-center py-20 text-xl text-gray-300">Loading...</div>;
@@ -48,17 +46,14 @@ const PropertyShow = ({ propertyName, onNavigate }) => {
               navigation
               pagination={{ clickable: true }}
               scrollbar={{ draggable: true }}
-              className="max-w-md w-full h-[300px]"
+              className="max-w-md w-full"
             >
               {property.images.map((img, index) => (
-                <SwiperSlide key={img || `img-${index}`}>
+                <SwiperSlide key={index}>
                   <img
                     src={img}
                     alt={`${property.name} ${index + 1}`}
-                    className="w-full h-full object-contain rounded"
-                    onError={(e) => {
-                      e.target.style.display = "none";
-                    }}
+                    className="w-full h-64 object-contain"
                   />
                 </SwiperSlide>
               ))}
@@ -67,7 +62,6 @@ const PropertyShow = ({ propertyName, onNavigate }) => {
             <p className="text-gray-400 text-center">No images available</p>
           )}
         </div>
-        
         <div className="p-8">
           <h1 className="text-4xl font-bold mb-2 text-white">{property.name}</h1>
           <p className="text-lg text-gray-400 mb-2">📍 {property.location}</p>
@@ -75,12 +69,14 @@ const PropertyShow = ({ propertyName, onNavigate }) => {
 
           <div className="bg-gradient-to-r from-gray-800 to-indigo-900 p-4 rounded-lg mb-6 border border-gray-700">
             <p className="text-2xl font-semibold text-white">
-              ₹{(property.costPerSqInch || 0)?.toLocaleString()} per sq. ft.
+              ₹{property.costPerSqInch?.toLocaleString()} per sq. ft.
             </p>
           </div>
 
           <div className="my-6">
-            <h2 className="text-2xl font-semibold text-white mb-3">Location on Map</h2>
+            <h2 className="text-2xl font-semibold text-white mb-3">
+              Location on Map
+            </h2>
             <div className="w-full h-[400px] rounded-lg overflow-hidden border border-gray-800 shadow-md">
               <iframe
                 src={
@@ -153,23 +149,18 @@ const PropertyShow = ({ propertyName, onNavigate }) => {
           )}
 
           {activeTab === "emi" && (
-            <div className="text-center py-8 text-gray-400">
-              EMI Calculator (Component will go here)
-              <br />
-              <small>Price: ₹{(property.costPerSqInch * 1000 || 0).toLocaleString()}</small>
-            </div>
+            <EMICalculator propertyPrice={property.costPerSqInch * 1000} />
           )}
 
           {activeTab === "nearby" && (
-            <div className="text-center py-8 text-gray-400">
-              Nearby Places for {property.location}
-            </div>
+            <NearbyPlaces location={property.location} />
           )}
 
           {activeTab === "investment" && (
-            <div className="text-center py-8 text-gray-400">
-              Investment Analysis for {property.location}
-            </div>
+            <InvestmentAnalysis
+              propertyPrice={property.costPerSqInch * 1000}
+              location={property.location}
+            />
           )}
         </div>
       </div>
