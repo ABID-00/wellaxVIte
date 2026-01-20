@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Property from './models/property.js';
 import User from './models/user.js';
-import Enquiry from './models/enquiry.js';
+import Enquiry from './models/Enquiry.js';
 
 const app = express();  // Now works after imports
 
