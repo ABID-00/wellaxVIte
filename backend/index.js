@@ -10,7 +10,12 @@ import Enquiry from './models/Enquiry.js';
 
 const app = express();  // Now works after imports
 
-const mongo_url = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/wellax";
+const mongo_url = process.env.MONGO_URL;
+
+if (!mongo_url) {
+  console.error("❌ MONGO_URL is not defined");
+  process.exit(1);
+}
 
 
 
