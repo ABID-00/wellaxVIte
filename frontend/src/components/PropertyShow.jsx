@@ -17,7 +17,7 @@ const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4090";
 
 const PropertyShow = ({ propertyName, onNavigate }) => {
   const [property, setProperty] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("overview");
 
   useEffect(() => {

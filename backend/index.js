@@ -17,6 +17,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(cors({
+  origin: "*", // allow all (safe for testing)
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
+
 // Database Connection
 async function main() {
   await mongoose.connect(mongo_url);
