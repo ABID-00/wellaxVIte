@@ -7,6 +7,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import EMICalculator from "./EMICalculator";
+import NearbyPlaces from "./NearbyPlaces";
+import InvestmentAnalysis from "./InvestmentAnalysis";
+
 
 // Vite env vars use VITE_ prefix
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4090";
@@ -153,22 +157,22 @@ const PropertyShow = ({ propertyName, onNavigate }) => {
           )}
 
           {activeTab === "emi" && (
-            <div className="text-center py-8 text-gray-400">
-              EMI Calculator (Component will go here)
+            <div className="text-align py-8 text-gray-400">
+              <EMICalculator/>
               <br />
               <small>Price: ₹{(property.costPerSqInch * 1000 || 0).toLocaleString()}</small>
             </div>
           )}
 
           {activeTab === "nearby" && (
-            <div className="text-center py-8 text-gray-400">
-              Nearby Places for {property.location}
+            <div className="py-8 text-gray-400">
+              <NearbyPlaces location={property.location} />
             </div>
           )}
 
           {activeTab === "investment" && (
-            <div className="text-center py-8 text-gray-400">
-              Investment Analysis for {property.location}
+            <div className="py-8 text-gray-400">
+              <InvestmentAnalysis propertyPrice={property.costPerSqInch*1000} location={property.location} />
             </div>
           )}
         </div>

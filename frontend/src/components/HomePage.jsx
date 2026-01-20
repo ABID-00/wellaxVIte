@@ -2,58 +2,129 @@ import React from "react";
 
 const HomePage = ({ onNavigate }) => {
   return (
-    <div className="animate-fadeIn min-h-screen space-y-16 text-gray-200 animate-fadeIn
-             bg-cover bg-center bg-no-repeat"
-       style={{
-        backgroundImage:
-          "url('https://plus.unsplash.com/premium_photo-1725408023469-d0659e7f3545?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
-      }}
-    >
-      <section className="text-center py-24 ">
-        <h1 className="text-5xl font-bold mb-4 text-white tracking-wide">
-          Welcome to Wellax Reality
-        </h1>
-        <p className="text-lg text-black-400 mb-8">
-          Find Your Dream Property with Confidence
-        </p>
-        {/* <button
-          onClick={() => onNavigate("allprojects")}
-          className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-500 hover:to-purple-500 shadow-md transition-transform transform hover:scale-105"
-        >
-          Explore Projects
-        </button> */}
+    <div className="w-full text-gray-200 bg-gradient-to-b from-[#0b0f1a] via-[#0e1222] to-[#0b0f1a]">
+
+      {/* HERO */}
+      <section
+        className="h-screen flex items-center justify-center px-6 bg-cover bg-center relative"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80')",
+        }}
+      >
+        {/* overlay */}
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+
+        <div className="relative z-10 text-center max-w-3xl bg-white/5 border border-white/10 rounded-3xl p-10 backdrop-blur-xl">
+          <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-6">
+            Find a Home That Feels Right
+          </h1>
+          <p className="text-lg text-gray-300 mb-8">
+            Thoughtfully designed homes that fit your lifestyle, budget,
+            and future — without the stress.
+          </p>
+
+          <div className="flex justify-center gap-6">
+            <button
+              onClick={() => onNavigate("our-project")}
+              className="px-8 py-3 bg-indigo-600 rounded-xl hover:bg-indigo-500 transition"
+            >
+              View Properties
+            </button>
+            <button
+              onClick={() => onNavigate("enquiry-form")}
+              className="px-8 py-3 border border-white/30 rounded-xl hover:bg-white/10 transition"
+            >
+              Enquire
+            </button>
+          </div>
+        </div>
       </section>
 
-      <section className="grid md:grid-cols-3 gap-8">
-        {[
-          {
-            icon: "🏢",
-            title: "Premium Properties",
-            desc: "Luxury apartments and villas in prime locations",
-          },
-          {
-            icon: "💰",
-            title: "Cost Calculator",
-            desc: "Transparent pricing with detailed breakdowns",
-          },
-          {
-            icon: "🤝",
-            title: "Expert Guidance",
-            desc: "Professional support throughout your journey",
-          },
-        ].map((item, idx) => (
-          <div
-            key={idx}
-            className="p-8 bg-gray-800/60 rounded-2xl border border-gray-700 hover:border-indigo-500 hover:shadow-lg hover:shadow-indigo-900/30 transition-transform transform hover:scale-105 backdrop-blur-md"
+      {/* FEATURES */}
+      <section className="h-screen flex flex-col justify-center items-center">
+        <div className="max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-3 gap-10">
+          {[
+            {
+              icon: "🏡",
+              title: "Premium Homes",
+              desc: "Curated properties in prime and peaceful locations.",
+            },
+            {
+              icon: "💰",
+              title: "Transparent Pricing",
+              desc: "Clear costs, no surprises, full confidence.",
+            },
+            {
+              icon: "🤝",
+              title: "Trusted Guidance",
+              desc: "We stay with you from visit to keys-in-hand.",
+            },
+          ].map((item, i) => (
+            <div
+              key={i}
+              className="bg-white/5 border border-white/10 p-8 rounded-2xl backdrop-blur-xl hover:border-indigo-500/50 transition"
+            >
+              <div className="text-5xl mb-4">{item.icon}</div>
+              <h3 className="text-2xl font-semibold mb-2 text-white">
+                {item.title}
+              </h3>
+              <p className="text-gray-400">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+        <div className="max-w-2xl bg-white/5 border border-white/10 rounded-3xl p-12 backdrop-blur-xl">
+          <h2 className="text-4xl font-bold mb-4">
+            Plan Your EMI Comfortably
+          </h2>
+          <p className="text-gray-400 mb-8">
+            Know your monthly commitment before making a big decision.
+          </p>
+          <button
+            onClick={() => onNavigate("calculator")}
+            className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl"
           >
-            <div className="text-5xl mb-4">{item.icon}</div>
-            <h3 className="text-xl font-semibold text-white mb-2">
-              {item.title}
-            </h3>
-            <p className="text-gray-400">{item.desc}</p>
-          </div>
-        ))}
+            Calculate EMI
+          </button>
+        </div>
       </section>
+
+      {/* EMI SECTION
+      <section className="h-screen flex items-center justify-center text-center px-6">
+        <div className="max-w-2xl bg-white/5 border border-white/10 rounded-3xl p-12 backdrop-blur-xl">
+          <h2 className="text-4xl font-bold mb-4">
+            Plan Your EMI Comfortably
+          </h2>
+          <p className="text-gray-400 mb-8">
+            Know your monthly commitment before making a big decision.
+          </p>
+          <button
+            onClick={() => onNavigate("calculator")}
+            className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl"
+          >
+            Calculate EMI
+          </button>
+        </div>
+      </section> */}
+
+      {/* FINAL CTA
+      <section className="h-screen flex items-center justify-center text-center px-6">
+        <div className="max-w-xl bg-white/5 border border-white/10 rounded-3xl p-12 backdrop-blur-xl">
+          <h2 className="text-4xl font-bold mb-4">
+            Let’s Talk About Your New Home
+          </h2>
+          <p className="text-gray-400 mb-8">
+            One simple enquiry is all it takes to get started.
+          </p>
+          <button
+            onClick={() => onNavigate("enquiry-form")}
+            className="px-8 py-4 bg-indigo-600 rounded-xl hover:bg-indigo-500 transition"
+          >
+            Enquire Now
+          </button>
+        </div>
+      </section> */}
+
     </div>
   );
 };

@@ -49,7 +49,7 @@ const PropertyGalleryCarousel = () => {
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
           loop
-          className="h-[600px]" // Fixed height for better Swiper behavior
+          className="h-[600px]"
         >
           {allImages.map((img, index) => (
             <SwiperSlide key={img || `img-${index}`}>

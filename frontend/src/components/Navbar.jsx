@@ -102,37 +102,11 @@ const Navbar = ({ onNavigate, user, onLogout }) => {
                     Silver Heights
                   </button>
                 </li>
-                
-                {/* <li>
-                  <hr className="border-gray-700 my-1" />
-                </li> */}
-                {/* <li>
-                  <button
-                    onClick={() => {
-                      onNavigate("allprojects");
-                      setDropdownOpen(false);
-                      setIsOpen(false);
-                    }}
-                    className="block px-4 py-2 w-full text-left hover:bg-indigo-700/30 text-gray-200"
-                  >
-                    All Projects
-                  </button>
-                </li> */}
               </ul>
             )}
           </li>
 
-          {/* <li>
-            <button
-              onClick={() => {
-                onNavigate("contact");
-                setIsOpen(false);
-              }}
-              className="text-gray-300 hover:text-indigo-300"
-            >
-              Contact
-            </button>
-          </li> */}
+          
            <li>
             <button
               onClick={() => {

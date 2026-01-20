@@ -47,11 +47,11 @@ export default function App() {
       case "gallery":
         return <PropertyGallery />;
       case "calculator":
-        return <div>Calculator (create this component)</div>;
+        return <Calculator />;
       case "enquiry-form":
-        return <div>Enquiry Form (create this component)</div>;
+        return <EnquiryForm />;
       case "enquiries":
-        return <div>Enquiry List (create this component)</div>;
+        return <EnquiryList />;
       case "auth":
         return <div>Auth (create this component)</div>;
       default:
