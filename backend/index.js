@@ -12,10 +12,7 @@ const app = express();  // Now works after imports
 
 const mongo_url = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/wellax";
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
 
 app.use(cors({
   origin: "*", // allow all (safe for testing)
@@ -23,6 +20,8 @@ app.use(cors({
   credentials: true
 }));
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Database Connection
 async function main() {
@@ -113,16 +112,18 @@ app.get("/api/projects", async (req, res) => {
   }
 });
 
-app.get("/projects/:name", async (req, res) => {
+app.get("/api/projects/:id", async (req, res) => {
   try {
-    const property = await Property.findOne({ name: req.params.name });
-    if (!property)
+    const property = await Property.findById(req.params.id);
+    if (!property) {
       return res.status(404).json({ error: "Property not found" });
+    }
     res.json(property);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 app.get("/property/:id/calculator", async (req, res) => {
   try {
